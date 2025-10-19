@@ -8,6 +8,10 @@
 </head>
 
 <body>
+    <header>
+        StudyHub 🧠
+    </header>
+
     <div class="container">
         <h2>Login</h2>
         <form method="POST">
@@ -15,8 +19,12 @@
             {{ form.as_p }}
             <button type="submit">Login</button>
         </form>
-        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+        <p>Don’t have an account? <a href="{% url 'register' %}">Register</a></p>
     </div>
+
+    <footer>
+        © 2025 StudyHub — Learn. Grow. Succeed.
+    </footer>
 </body>
 
 </html>
