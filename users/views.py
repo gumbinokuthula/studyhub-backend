@@ -31,3 +31,7 @@ def logout_view(request):
     logout(request)
     messages.info(request, "You’ve been logged out.")
     return redirect('/')
+from django.shortcuts import render
+
+def home_view(request):
+    return render(request, 'users/home.html')

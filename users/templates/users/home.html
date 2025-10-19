@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>StudyHub Home</title>
+</head>
+
+<body>
+    <h1>Welcome to StudyHub 🚀</h1>
+
+    {% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}!</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <p>Welcome, guest!</p>
+    <a href="{% url 'login' %}">Login</a> |
+    <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+</body>
+
+</html>
