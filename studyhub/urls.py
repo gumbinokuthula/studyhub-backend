@@ -21,5 +21,8 @@ from users import views as user_views  # ✅ import for home view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', user_views.home_view, name='home'),  # ✅ new home route
-    path('', include('users.urls')),              # ✅ include users URLs
+    path('', include('users.urls')),  
+    path('resources/', include('resources.urls')),
+    path('courses/', include('courses.urls')),
+    path('users/', include('users.urls')),        # ✅ include users URLs
 ]

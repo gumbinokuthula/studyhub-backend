@@ -87,3 +87,33 @@ footer {
     color: #555;
     font-size: 0.9em;
 }
+.btn-blue {
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+.btn-gray {
+    background-color: #6c757d;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-gray:hover {
+    background-color: #565e64;
+}
+
+.input-field {
+    padding: 6px 10px;
+    width: 300px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

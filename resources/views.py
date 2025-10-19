@@ -1,14 +1,32 @@
 from django.shortcuts import render, redirect
-from .models import Course, Assignment
 from django.contrib.auth.decorators import login_required
+from .models import Resource
+from courses.models import Course
+from django.contrib import messages
 
 @login_required
-def course_list(request):
-    courses = Course.objects.all()
-    return render(request, 'courses/course_list.html', {'courses': courses})
-
-@login_required
-def course_detail(request, course_id):
+def resource_list(request, course_id):
     course = Course.objects.get(id=course_id)
-    assignments = course.assignments.all()
-    return render(request, 'courses/course_detail.html', {'course': course, 'assignments': assignments})
+    resources = Resource.objects.filter(course=course)
+    return render(request, 'resources/resource_list.html', {'course': course, 'resources': resources})
+
+@login_required
+def resource_upload(request, course_id):
+    course = Course.objects.get(id=course_id)
+    
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        file = request.FILES.get('file')
+        if title and file:
+            Resource.objects.create(
+                course=course,
+                title=title,
+                file=file,
+                uploaded_by=request.user
+            )
+            messages.success(request, "Resource uploaded successfully!")
+            return redirect('resource_list', course_id=course.id)
+        else:
+            messages.error(request, "Please provide a title and a file.")
+    
+    return render(request, 'resources/resource_upload.html', {'course': course})
