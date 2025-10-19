@@ -1,22 +1,33 @@
-from rest_framework import generics, permissions
-from django.contrib.auth import get_user_model
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .serializers import RegisterSerializer, UserSerializer
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
+from django.contrib import messages
 
-User = get_user_model()
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful!")
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'users/register.html', {'form': form})
 
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
-    permission_classes = [permissions.AllowAny]
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, "Welcome back!")
+            return redirect('/')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'users/login.html', {'form': form})
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data['username'] = self.user.username
-        data['role'] = self.user.role
-        return data
-
-class LoginView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
+def logout_view(request):
+    logout(request)
+    messages.info(request, "You’ve been logged out.")
+    return redirect('/')
