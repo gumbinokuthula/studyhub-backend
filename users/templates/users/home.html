@@ -3,9 +3,13 @@
 
 <head>
     <title>StudyHub Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 
 <body>
+ <div class="container">
     <h1>Welcome to StudyHub 🚀</h1>
 
     {% if user.is_authenticated %}
@@ -16,6 +20,8 @@
     <a href="{% url 'login' %}">Login</a> |
     <a href="{% url 'register' %}">Register</a>
     {% endif %}
+  </div>
+
 </body>
 
 </html>

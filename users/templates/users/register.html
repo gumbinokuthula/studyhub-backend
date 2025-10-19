@@ -3,16 +3,23 @@
 
 <head>
     <title>Register | StudyHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 
 <body>
-    <h2>Register</h2>
+
+ <div class="container">
+     <h2>Register</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Sign Up</button>
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+  </div>
 </body>
+
 
 </html>
