@@ -1,15 +1,8 @@
-from rest_framework import generics, permissions
+from django.shortcuts import render
 from .models import Course
-from .serializers import CourseSerializer
+from django.contrib.auth.decorators import login_required
 
-class CourseListCreateView(generics.ListCreateAPIView):
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(instructor=self.request.user)
-
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            return [permissions.IsAuthenticated()]
-        return [permissions.AllowAny()]
+@login_required
+def course_list(request):
+    courses = Course.objects.all()
+    return render(request, 'courses/course_list.html', {'courses': courses})
