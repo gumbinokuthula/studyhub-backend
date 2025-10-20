@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ assignment.title }} - Submissions</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header>StudyHub 🧠</header>
+    <div class="container">
+        <h1>Submissions for {{ assignment.title }}</h1>
+
+        <ul>
+            {% for submission in submissions %}
+            <li>
+                <strong>{{ submission.student.username }}</strong> -
+                {% if submission.grade %}
+                Graded: {{ submission.grade }}%
+                {% else %}
+                {{ submission.status }}
+                {% endif %}
+                <a href="{{ submission.file.url }}">Download</a>
+                {% if submission.feedback %}
+                <p>Feedback: {{ submission.feedback }}</p>
+                {% endif %}
+            </li>
+            {% empty %}
+            <li>No submissions yet.</li>
+            {% endfor %}
+        </ul>
+
+        {% if not user.is_staff %}
+        <a href="{% url 'submission_create' assignment.id %}" class="btn-blue">Submit Your Work</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>

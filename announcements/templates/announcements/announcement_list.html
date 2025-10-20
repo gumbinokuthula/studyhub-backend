@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course.title }} - Announcements</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header>StudyHub 🧠</header>
+    <div class="container">
+        <h1>Announcements for {{ course.title }}</h1>
+
+        {% if user.is_staff %}
+        <a href="{% url 'announcement_create' course.id %}" class="btn-blue">Create New Announcement</a>
+        {% endif %}
+
+        <ul>
+            {% for announcement in announcements %}
+            <li>
+                <h3>{{ announcement.title }}</h3>
+                <p>{{ announcement.message }}</p>
+                <small>Posted on {{ announcement.created_at|date:"Y-m-d H:i" }} by {{ announcement.created_by.username
+                    }}</small>
+            </li>
+            {% empty %}
+            <li>No announcements yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Announcement - {{ course.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header>StudyHub 🧠</header>
+    <div class="container">
+        <h1>Create Announcement for {{ course.title }}</h1>
+
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="message">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <label>Title:</label><br>
+            <input type="text" name="title" class="input-field"><br><br>
+
+            <label>Message:</label><br>
+            <textarea name="message" rows="4" class="input-field"></textarea><br><br>
+
+            <button type="submit" class="btn-blue">Post Announcement</button>
+        </form>
+
+        <br>
+        <a href="{% url 'announcement_list' course.id %}" class="btn-gray">Back to Announcements</a>
+    </div>
+</body>
+
+</html>
