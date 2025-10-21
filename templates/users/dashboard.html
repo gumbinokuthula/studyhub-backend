@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Welcome to StudyHub Dashboard</h2>
+    <p>Use the links below to explore your study resources.</p>
+
+    <div class="dashboard-links">
+        <a href="{% url 'resources' %}" class="btn">Resources</a>
+        <a href="{% url 'assignments' %}" class="btn">Assignments</a>
+        <a href="{% url 'submissions' %}" class="btn">Submissions</a>
+        <a href="{% url 'announcements' %}" class="btn">Announcements</a>
+    </div>
+</div>
+{% endblock %}

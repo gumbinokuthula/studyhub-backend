@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views  # ✅ import for home view
+from resources import views as resources_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,5 @@ urlpatterns = [
     path('assignments/', include('assignments.urls')),
     path('submissions/', include('submissions.urls')),
     path('announcements/', include('announcements.urls')),
-
-      
+    path('resources/', resources_views.resource_list, name='resources'),
 ]

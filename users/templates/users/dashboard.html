@@ -8,7 +8,7 @@
 
     <div class="dashboard-buttons">
         <a href="{% url 'courses_home' %}" class="dash-btn">📚 Courses</a>
-        <a href="{% url 'assignments_home' %}" class="dash-btn">📝 Assignments</a>
+        <a href="{% url 'assignment_list' %}" class="dash-btn">📝 Assignments</a>
         <a href="{% url 'resources_home' %}" class="dash-btn">📂 Resources</a>
         <a href="{% url 'announcements_home' %}" class="dash-btn">📢 Announcements</a>
     </div>
@@ -18,3 +18,9 @@
     </div>
 </div>
 {% endblock %}
+<div class="dashboard-links">
+    <a href="{% url 'resources' %}" class="btn">Resources</a>
+    <a href="{% url 'assignments' %}" class="btn">Assignments</a>
+    <a href="{% url 'submissions' %}" class="btn">Submissions</a>
+    <a href="{% url 'announcements' %}" class="btn">Announcements</a>
+</div>
