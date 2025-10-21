@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome to StudyHub, {{ user.username }} 🎓</h1>
+    <p class="tagline">Your all-in-one space to manage your learning journey.</p>
+
+    <div class="dashboard-buttons">
+        <a href="{% url 'courses_home' %}" class="dash-btn">📚 Courses</a>
+        <a href="{% url 'assignments_home' %}" class="dash-btn">📝 Assignments</a>
+        <a href="{% url 'resources_home' %}" class="dash-btn">📂 Resources</a>
+        <a href="{% url 'announcements_home' %}" class="dash-btn">📢 Announcements</a>
+    </div>
+
+    <div class="logout-section">
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+</div>
+{% endblock %}

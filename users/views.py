@@ -4,6 +4,25 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def courses_home(request):
+    return HttpResponse("<h2>📚 Courses page coming soon!</h2>")
+
+def assignments_home(request):
+    return HttpResponse("<h2>📝 Assignments page coming soon!</h2>")
+
+def resources_home(request):
+    return HttpResponse("<h2>📂 Resources page coming soon!</h2>")
+
+def announcements_home(request):
+    return HttpResponse("<h2>📢 Announcements page coming soon!</h2>")
+
+
+def home_view(request):
+    return render(request, 'home.html')
+
 
 def register_view(request):
     if request.method == 'POST':

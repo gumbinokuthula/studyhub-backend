@@ -1,15 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Register</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body>
-  ...
-</body>
-
-</html>
+{% block content %}
+<div class="form-container">
+  <h2>Create an Account ✨</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Register</button>
+  </form>
+  <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+</div>
+{% endblock %}
