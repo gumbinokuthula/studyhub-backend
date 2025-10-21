@@ -64,9 +64,18 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'studyhub.urls'
 
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+
+
 
 TEMPLATES = [
     {
@@ -161,5 +170,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/login/'
