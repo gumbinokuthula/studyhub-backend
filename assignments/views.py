@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Assignment
 from courses.models import Course
@@ -33,3 +33,6 @@ def assignment_create(request, course_id):
             messages.error(request, "All fields are required.")
     
     return render(request, 'assignments/assignment_create.html', {'course': course})
+def assignment_detail(request, id):
+    assignment = get_object_or_404(Assignment, id=id)
+    return render(request, 'assignments/assignment_detail.html', {'assignment': assignment})

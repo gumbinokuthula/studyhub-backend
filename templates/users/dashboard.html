@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
-{% block content %}
-<div class="container">
-    <h2>Welcome to StudyHub Dashboard</h2>
-    <p>Use the links below to explore your study resources.</p>
+{% load static %}
 
-    <div class="dashboard-links">
-        <a href="{% url 'resources' %}" class="btn">Resources</a>
-        <a href="{% url 'assignments' %}" class="btn">Assignments</a>
-        <a href="{% url 'submissions' %}" class="btn">Submissions</a>
-        <a href="{% url 'announcements' %}" class="btn">Announcements</a>
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome to StudyHub, {{ user.username }} 🎓</h1>
+    <p class="tagline">Your all-in-one space to manage your learning journey.</p>
+
+    <h2>Your Courses</h2>
+    <ul class="course-list">
+        {% for course in courses %}
+        <li class="course-item">
+            <strong>{{ course.name }}</strong>
+
+            <div class="course-links">
+                <a href="{% url 'course_detail' course.id %}">📚 View Course</a>
+                <a href="{% url 'assignment_list' course.id %}">📝 Assignments</a>
+                <a href="{% url 'resources_home' %}">📂 Resources</a>
+
+                <a href="{% url 'announcement_list' course.id %}">📢 Announcements</a>
+            </div>
+        </li>
+        {% empty %}
+        <p>No courses available yet.</p>
+        {% endfor %}
+    </ul>
+
+    <div class="logout-section">
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
     </div>
 </div>
 {% endblock %}

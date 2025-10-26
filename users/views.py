@@ -6,6 +6,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
+from courses.models import Course
+
+def dashboard_view(request):
+    courses = Course.objects.all()
+    return render(request, 'users/dashboard.html', {'courses': courses})
+
 
 def courses_home(request):
     return HttpResponse("<h2>📚 Courses page coming soon!</h2>")
@@ -61,4 +67,5 @@ def home_view(request):
     
 @login_required
 def dashboard_view(request):
-    return render(request, 'users/dashboard.html')
+    courses = Course.objects.all()
+    return render(request, 'users/dashboard.html', {'courses': courses})
