@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course.title }} - Resources</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header>StudyHub 🧠</header>
+    <div class="container">
+        <h1>Resources for {{ course.title }}</h1>
+        {% if user.is_staff %}
+        <a href="{% url 'resource_upload' course.id %}" class="btn-blue">Upload New Resource</a>
+        {% endif %}
+        <ul>
+            {% for resource in resources %}
+            <li>
+                <a href="{{ resource.file.url }}" target="_blank">{{ resource.title }}</a>
+                <small>uploaded by {{ resource.uploaded_by.username }} on {{ resource.uploaded_at|date:"Y-m-d"
+                    }}</small>
+            </li>
+            {% empty %}
+            <li>No resources uploaded yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -6,15 +6,102 @@
     <h1>Welcome to StudyHub, {{ user.username }} 🎓</h1>
     <p class="tagline">Your all-in-one space to manage your learning journey.</p>
 
+    <h2>Your Courses</h2>
+    {% if courses %}
+    <ul class="course-list">
+        {% for course in courses %}
+        <li class="course-item">
+            <strong>{{ course.title }}</strong> - {{ course.description }}
+            <div class="course-links">
+                <!-- Links for course actions -->
+                <a href="{% url 'course_detail' course.id %}" class="dash-btn">📚 View Course</a>
+                <a href="{% url 'assignment_list' course.id %}" class="dash-btn">📝 Assignments</a>
+                <a href="{% url 'resource_list' course.id %}" class="dash-btn">📂 Resources</a>
+                <a href="{% url 'announcement_list' course.id %}" class="dash-btn">📢 Announcements</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No courses available yet.</p>
+    {% endif %}
+
     <div class="dashboard-buttons">
-        <a href="{% url 'courses_home' %}" class="dash-btn">📚 Courses</a>
-        <a href="{% url 'assignment_list' %}" class="dash-btn">📝 Assignments</a>
-        <a href="{% url 'resources_home' %}" class="dash-btn">📂 Resources</a>
-        <a href="{% url 'announcements_home' %}" class="dash-btn">📢 Announcements</a>
+        <a href="{% url 'courses_home' %}" class="dash-btn">📚 All Courses</a>
+        <a href="{% url 'assignments_home' %}" class="dash-btn">📝 All Assignments</a>
+        <a href="{% url 'resources_home' %}" class="dash-btn">📂 All Resources</a>
+        <a href="{% url 'announcements_home' %}" class="dash-btn">📢 All Announcements</a>
     </div>
 
     <div class="logout-section">
         <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
     </div>
 </div>
+
+<style>
+    .dashboard-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f0f8ff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .course-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .course-item {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+
+    .course-links {
+        margin-top: 8px;
+    }
+
+    .course-links a {
+        margin-right: 12px;
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .course-links a:hover {
+        text-decoration: underline;
+    }
+
+    .dash-btn {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 5px 0;
+        background: #007bff;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .dash-btn:hover {
+        background: #0056b3;
+    }
+
+    .logout-btn {
+        display: inline-block;
+        padding: 8px 12px;
+        margin-top: 20px;
+        background: #dc3545;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .logout-btn:hover {
+        background: #b52a37;
+    }
+</style>
 {% endblock %}

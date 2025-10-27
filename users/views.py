@@ -4,14 +4,8 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.http import HttpResponse
 from courses.models import Course
-
-def dashboard_view(request):
-    courses = Course.objects.all()
-    return render(request, 'users/dashboard.html', {'courses': courses})
-
 
 def courses_home(request):
     return HttpResponse("<h2>📚 Courses page coming soon!</h2>")
@@ -25,10 +19,8 @@ def resources_home(request):
 def announcements_home(request):
     return HttpResponse("<h2>📢 Announcements page coming soon!</h2>")
 
-
 def home_view(request):
-    return render(request, 'home.html')
-
+    return render(request, 'users/home.html')
 
 def register_view(request):
     if request.method == 'POST':
@@ -42,7 +34,6 @@ def register_view(request):
         form = CustomUserCreationForm()
     return render(request, 'users/register.html', {'form': form})
 
-
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -50,7 +41,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, "Welcome back!")
-            return redirect('/')
+            return redirect('/users/dashboard/')
     else:
         form = AuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
@@ -58,13 +49,8 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "You’ve been logged out.")
-    return redirect('/users/dashboard/')
+    return redirect('/')
 
-from django.shortcuts import render
-
-def home_view(request):
-    return render(request, 'users/home.html')
-    
 @login_required
 def dashboard_view(request):
     courses = Course.objects.all()
