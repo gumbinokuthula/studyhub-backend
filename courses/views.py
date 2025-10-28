@@ -16,3 +16,4 @@ def course_detail(request, course_id):
 def dashboard(request):
     courses = Course.objects.filter(teacher=request.user)
     return render(request, "dashboard.html", {"courses": courses})
+
